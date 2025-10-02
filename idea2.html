@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elementum (Pvt) Ltd - Coming Soon</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 20px;
+      text-align: center;
+      background: #0a0f1c;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #4db8ff;
+    }
+    header p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+    .sectors {
+      display: flex;
+      flex: 1;
+      height: 100%;
+    }
+    .sector {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      text-align: center;
+      padding: 40px;
+    }
+    .sector h2 {
+      margin-top: 20px;
+      font-size: 1.5rem;
+    }
+    .sector p {
+      font-size: 0.9rem;
+      margin-top: 10px;
+      color: #ddd;
+    }
+
+    /* Background colors for sectors */
+    .lab { background: #1a2a3a; }
+    .machinery { background: #162833; }
+    .engineering { background: #13202b; }
+
+    /* Hover effects */
+    .sector:hover {
+      flex: 1.2;
+      background: #264d73;
+    }
+    .sector svg {
+      width: 80px;
+      height: 80px;
+      fill: #ffcc00;
+      transition: transform 0.3s ease;
+    }
+    .sector:hover svg {
+      transform: scale(1.2);
+      fill: #4db8ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #0a0f1c;
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    @media(max-width: 768px) {
+      .sectors {
+        flex-direction: column;
+      }
+      .sector {
+        flex: none;
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Elementum (Pvt) Ltd</h1>
+    <p>Precision • Power • Innovation</p>
+  </header>
+
+  <section class="sectors">
+    <!-- Laboratory Instruments -->
+    <div class="sector lab">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <path d="M24 2v20.6L8.5 53.9c-1.9 3.8 1.2 8.1 5.4 8.1h36.2c4.2 0 7.3-4.3 5.4-8.1L40 22.6V2h-6v22l15 30H15l15-30V2h-6z"/>
+      </svg>
+      <h2>Laboratory Instruments</h2>
+      <p>Innovative tools and chemicals for precision research.</p>
+    </div>
+
+    <!-- Industrial Machinery -->
+    <div class="sector machinery">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <path d="M32 12a20 20 0 1 0 20 20A20 20 0 0 0 32 12zm0 34a14 14 0 1 1 14-14 14 14 0 0 1-14 14zm1-22h-2v10h10v-2H33z"/>
+      </svg>
+      <h2>Industrial Machinery</h2>
+      <p>Powerful and efficient solutions driving industries forward.</p>
+    </div>
+
+    <!-- Engineering Services -->
+    <div class="sector engineering">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <path d="M4 52V12c0-2.2 1.8-4 4-4h48c2.2 0 4 1.8 4 4v40c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4zm4-24h48V12H8v16zm0 20h48v-12H8v12z"/>
+      </svg>
+      <h2>Engineering Services</h2>
+      <p>Smart, scalable engineering designed for tomorrow.</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Elementum (Pvt) Ltd. All rights reserved. | Coming Soon
+  </footer>
+</body>
+</html>
