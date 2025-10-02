@@ -1,112 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elementum (Pvt) Ltd - Coming Soon</title>
+  <title>Elementum (PVT) Ltd | Coming Soon</title>
+  <meta name="description"
+    content="Elementum (Pvt) Ltd provides laboratory instruments, chemicals, industrial machinery, and engineering services. Website coming soon.">
+  <meta name="keywords"
+    content="Elementum, laboratory instruments, chemicals, industrial machinery, engineering services, Sri Lanka">
+  <meta name="author" content="Elementum Pvt Ltd">
+  <meta name="pwa-capable" content="yes">
+  <link rel="canonical" href="https://elementum.lk" />
+  <meta property="og:type" content="website" />
+  <link rel="manifest" href="assets/manifest.json">
+  <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="assets/icons/favicon.ico" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="android-chrome-192x192" type="image/png" sizes="192x192" href="assets/icons/android-chrome-192x192.png">
+  <link rel="android-chrome-512x512" type="image/png" sizes="512x512" href="assets/icons/android-chrome-512x512.png">
+  <link rel="favicon-16x16" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+  <link rel="favicon-32x32" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  
+
   <style>
-    body {
+    /* CSS Reset with Mobile-First Approach */
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Base Styles */
+    :root {
+      --primary-color: #0a0f1c;
+      --secondary-color: #4db8ff;
+      --accent-color: #ffcc00;
+      --text-light: #fff;
+      --text-muted: #ccc;
+      --card-dark: #1a2a3a;
+      --card-darker: #162833;
+      --card-darkest: #13202b;
+      --hover-color: #264d73;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0a0f1c;
-      color: #f5f5f5;
-      overflow: hidden;
+      color: var(--text-light);
+      background: var(--primary-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      padding: 1.5rem 1rem;
       text-align: center;
-    }
-    .background {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-image: linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
-                        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-      background-size: 40px 40px;
-      z-index: 0;
-    }
-    .content {
+      background: var(--primary-color);
       position: relative;
-      z-index: 1;
-      max-width: 600px;
-      padding: 20px;
     }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      color: #4db8ff;
+
+    header h1 {
+      font-size: 1.8rem;
+      color: var(--secondary-color);
+      margin-bottom: 0.5rem;
     }
-    h2 {
-      font-size: 1.2rem;
-      font-weight: 400;
-      margin-bottom: 30px;
-    }
-    .countdown {
-      font-size: 1.5rem;
-      color: #ffcc00;
-      margin-bottom: 20px;
-    }
-    input[type="email"] {
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      width: 70%;
-      margin-right: 10px;
-    }
-    button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      background: #4db8ff;
-      color: #fff;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #3399ff;
-    }
-    footer {
-      margin-top: 40px;
+
+    header p.tagline {
       font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Main Content - Sectors */
+    .sectors {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      flex: 1;
+    }
+
+    .sector {
+      padding: 3rem 1.5rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+    }
+
+    .sector h2 {
+      margin-top: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .sector p {
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      color: var(--text-muted);
+      max-width: 300px;
+    }
+
+    /* Background colors */
+    .lab {
+      background: var(--card-dark);
+    }
+
+    .machinery {
+      background: var(--card-darker);
+    }
+
+    .engineering {
+      background: var(--card-darkest);
+    }
+
+    /* Hover animation */
+    .sector:hover {
+      background: var(--hover-color);
+    }
+
+    .sector svg {
+      width: 70px;
+      height: 70px;
+      fill: var(--accent-color);
+      transition: transform 0.3s ease, fill 0.3s ease;
+    }
+
+    .sector:hover svg {
+      transform: scale(1.1);
+      fill: var(--secondary-color);
+    }
+
+    /* Notify Section */
+    .notify-section {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      background: var(--primary-color);
+    }
+
+    .notify-section p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .notify {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    input[type="email"] {
+      padding: 1rem;
+      border: none;
+      border-radius: 4px;
+      outline: none;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    button {
+      background: var(--accent-color);
+      color: var(--primary-color);
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    button:hover,
+    button:focus {
+      background: #ffc107;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--primary-color);
+      font-size: 0.85rem;
       color: #bbb;
+    }
+
+    /* Tablet Styles */
+    @media (min-width: 768px) {
+      header {
+        padding: 2rem;
+      }
+
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      header p.tagline {
+        font-size: 1rem;
+      }
+
+      .sectors {
+        flex-direction: row;
+        height: 70vh;
+      }
+
+      .sector {
+        padding: 2rem;
+        min-height: auto;
+        flex: 1;
+        height: 100%;
+      }
+
+      .sector h2 {
+        font-size: 1.7rem;
+      }
+
+      .sector p {
+        font-size: 1rem;
+      }
+
+      .sector svg {
+        width: 80px;
+        height: 80px;
+      }
+
+      .notify {
+        flex-direction: row;
+        max-width: 500px;
+      }
+
+      input[type="email"] {
+        width: 70%;
+      }
+
+      button {
+        width: 30%;
+      }
+    }
+
+    /* Desktop Styles */
+    @media (min-width: 1024px) {
+      header {
+        padding: 2.5rem;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      .sector {
+        padding: 3rem;
+      }
+
+      .sector h2 {
+        font-size: 1.8rem;
+      }
+
+      .sector p {
+        font-size: 1.05rem;
+      }
+
+      .notify-section {
+        padding: 3rem 2rem;
+      }
+
+      .notify {
+        max-width: 600px;
+      }
+    }
+
+    /* Large Desktop Styles */
+    @media (min-width: 1200px) {
+      .sector {
+        padding: 4rem;
+      }
+    }
+
+    /* Accessibility Improvements */
+    button:focus,
+    input:focus {
+      outline: 2px solid var(--secondary-color);
+      outline-offset: 2px;
+    }
+
+    /* Touch-friendly improvements */
+    @media (hover: none) {
+      .sector:hover {
+        background: inherit;
+      }
+
+      .sector:active {
+        background: var(--hover-color);
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="background"></div>
-  <div class="content">
-    <h1>Elementum (Pvt) Ltd</h1>
-    <h2>Engineering Tomorrow, Today</h2>
-    <p class="countdown" id="countdown">Launching in 30 Days</p>
+  <header>
+    <h1>Elementum (PVT) Ltd</h1>
+    <p class="tagline">Precision • Power • Innovation</p>
+  </header>
 
-    <form>
-      <input type="email" placeholder="Enter your email to stay updated" required>
-      <button type="submit">Notify Me</button>
-    </form>
-
-    <footer>
-      © 2025 Elementum (Pvt) Ltd. All rights reserved.
-    </footer>
+  <div class="sectors">
+    <div class="sector lab">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <path
+          d="M40 6v20.35l13.43 23.2A8 8 0 0 1 46.43 62H17.57a8 8 0 0 1-6.99-12.45L24 26.35V6zM28 10v18.35L13.14 50a4 4 0 0 0 3.43 6h28.86a4 4 0 0 0 3.43-6L36 28.35V10z" />
+      </svg>
+      <h2>Laboratory Instruments</h2>
+      <p>Innovative tools and chemicals for precision research.</p>
+    </div>
+    <div class="sector machinery">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <path
+          d="M54 28h-4.09a17.93 17.93 0 0 0-3.4-8.18l2.9-2.9a2 2 0 0 0 0-2.82l-4.51-4.51a2 2 0 0 0-2.82 0l-2.9 2.9A17.93 17.93 0 0 0 36 14.09V10a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v4.09a17.93 17.93 0 0 0-8.18 3.4l-2.9-2.9a2 2 0 0 0-2.82 0l-4.51 4.51a2 2 0 0 0 0 2.82l2.9 2.9A17.93 17.93 0 0 0 14.09 28H10a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4.09a17.93 17.93 0 0 0 3.4 8.18l-2.9 2.9a2 2 0 0 0 0 2.82l4.51 4.51a2 2 0 0 0 2.82 0l2.9-2.9A17.93 17.93 0 0 0 28 49.91V54a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-4.09a17.93 17.93 0 0 0 8.18-3.4l2.9 2.9a2 2 0 0 0 2.82 0l4.51-4.51a2 2 0 0 0 0-2.82l-2.9-2.9A17.93 17.93 0 0 0 49.91 38H54a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2zM32 42a10 10 0 1 1 10-10 10 10 0 0 1-10 10z" />
+      </svg>
+      <h2>Industrial Machinery</h2>
+      <p>Powerful and efficient solutions driving industries forward.</p>
+    </div>
+    <div class="sector engineering">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <path
+          d="M6 54V10a2 2 0 0 1 2-2h48a2 2 0 0 1 2 2v44a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2zm44-2V12H10v40zM18 20h28v4H18zm0 10h28v4H18zm0 10h20v4H18z" />
+      </svg>
+      <h2>Engineering Services</h2>
+      <p>Smart, scalable engineering designed for tomorrow.</p>
+    </div>
   </div>
 
+  <!-- Notify Section -->
+  <div class="notify-section">
+    <p><strong>Our website is coming soon. Stay updated!</strong></p>
+    <div class="notify">
+      <input type="email" placeholder="Enter your email" aria-label="Email for updates">
+      <button>Notify Me</button>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Elementum (Pvt) Ltd. All rights reserved. | Coming Soon
+  </footer>
+
+  <!-- PWA Service Worker -->
   <script>
-    // Simple countdown timer (30 days from now)
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 30);
-
-    function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate - now;
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById("countdown").innerText =
-        `Launching in ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js")
+        .then(() => console.log("Service Worker registered"))
+        .catch(err => console.error("Service Worker failed", err));
     }
-
-    setInterval(updateCountdown, 1000);
   </script>
 </body>
+
 </html>
