@@ -17,14 +17,14 @@
   <link rel="shortcut icon" href="assets/icons/favicon.ico" type="image/x-icon">
   <link rel="icon" href="assets/icons/favicon.ico" />
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
-  <link rel="android-chrome-192x192" type="image/png" sizes="192x192" href="assets/icons/android-chrome-192x192.png">
+  <link rel="android-chrome-192x192" type="image/png" sizes="192x192" href="icons/android-chrome-192x192.png">
   <link rel="android-chrome-512x512" type="image/png" sizes="512x512" href="assets/icons/android-chrome-512x512.png">
   <link rel="favicon-16x16" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
   <link rel="favicon-32x32" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
   
 
   <style>
-    /* CSS Reset with Mobile-First Approach */
+     /* CSS Reset with Mobile-First Approach */
     * {
       margin: 0;
       padding: 0;
@@ -42,6 +42,8 @@
       --card-darker: #162833;
       --card-darkest: #13202b;
       --hover-color: #264d73;
+      --error-color: #ff4444;
+      --success-color: #00c851;
     }
 
     html {
@@ -152,43 +154,448 @@
     .notify-section p {
       font-size: 1.1rem;
       margin-bottom: 1.5rem;
+      color: var(--text-light);
     }
 
-    .notify {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-
-    input[type="email"] {
-      padding: 1rem;
-      border: none;
-      border-radius: 4px;
-      outline: none;
-      width: 100%;
-      font-size: 1rem;
-    }
-
-    button {
+    .notify-btn {
       background: var(--accent-color);
       color: var(--primary-color);
-      padding: 1rem 1.5rem;
+      padding: 1rem 2.5rem;
       border: none;
-      border-radius: 4px;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
-      transition: background 0.3s ease;
-      width: 100%;
-      font-size: 1rem;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
     }
 
-    button:hover,
-    button:focus {
+    .notify-btn:hover,
+    .notify-btn:focus {
       background: #ffc107;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 204, 0, 0.4);
+    }
+
+    /* Dialog/Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, var(--card-dark) 0%, var(--card-darker) 100%);
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      position: relative;
+      animation: slideUp 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--secondary-color);
+    }
+
+    .modal-header h2 {
+      color: var(--secondary-color);
+      font-size: 1.5rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      border-radius: 50%;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+      transform: rotate(90deg);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .form-group label .required {
+      color: var(--error-color);
+      margin-left: 2px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.875rem;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-light);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .form-group.error input,
+    .form-group.error textarea {
+      border-color: var(--error-color);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--accent-color);
+      color: var(--primary-color);
+      padding: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: #ffc107;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 204, 0, 0.4);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .success-message {
+      background: var(--success-color);
+      color: white;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      display: none;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    /* Scrollbar Styling */
+    .modal-content::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .modal-content::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+
+    .modal-content::-webkit-scrollbar-thumb {
+      background: var(--secondary-color);
+      border-radius: 10px;
+    }
+
+    /* Dialog/Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, var(--card-dark) 0%, var(--card-darker) 100%);
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      position: relative;
+      animation: slideUp 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--secondary-color);
+    }
+
+    .modal-header h2 {
+      color: var(--secondary-color);
+      font-size: 1.5rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      border-radius: 50%;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+      transform: rotate(90deg);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .form-group label .required {
+      color: var(--error-color);
+      margin-left: 2px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.875rem;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-light);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .form-group.error input,
+    .form-group.error textarea {
+      border-color: var(--error-color);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--accent-color);
+      color: var(--primary-color);
+      padding: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: #ffc107;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 204, 0, 0.4);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .success-message {
+      background: var(--success-color);
+      color: white;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      display: none;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .success-message.show {
+      display: block;
     }
 
     /* Footer */
@@ -216,7 +623,7 @@
 
       .sectors {
         flex-direction: row;
-        height: 70vh;
+        height: 60vh;
       }
 
       .sector {
@@ -239,17 +646,12 @@
         height: 80px;
       }
 
-      .notify {
-        flex-direction: row;
-        max-width: 500px;
+      .modal-content {
+        padding: 2.5rem;
       }
 
-      input[type="email"] {
-        width: 70%;
-      }
-
-      button {
-        width: 30%;
+      .modal-header h2 {
+        font-size: 1.8rem;
       }
     }
 
@@ -278,10 +680,6 @@
       .notify-section {
         padding: 3rem 2rem;
       }
-
-      .notify {
-        max-width: 600px;
-      }
     }
 
     /* Large Desktop Styles */
@@ -293,7 +691,8 @@
 
     /* Accessibility Improvements */
     button:focus,
-    input:focus {
+    input:focus,
+    textarea:focus {
       outline: 2px solid var(--secondary-color);
       outline-offset: 2px;
     }
@@ -307,6 +706,21 @@
       .sector:active {
         background: var(--hover-color);
       }
+    }
+
+    /* Scrollbar Styling */
+    .modal-content::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .modal-content::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+
+    .modal-content::-webkit-scrollbar-thumb {
+      background: var(--secondary-color);
+      border-radius: 10px;
     }
   </style>
 </head>
@@ -344,21 +758,257 @@
     </div>
   </div>
 
-  <!-- Notify Section -->
+ <!-- Notify Section -->
   <div class="notify-section">
     <p><strong>Our website is coming soon. Stay updated!</strong></p>
-    <div class="notify">
-      <input type="email" placeholder="Enter your email" aria-label="Email for updates">
-      <button>Notify Me</button>
+    <button class="notify-btn" id="openModalBtn">Notify Me</button>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Get in Touch</h2>
+        <button class="close-btn" id="closeModalBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      
+      <div class="success-message" id="successMessage">
+        Thank you! Your message has been sent successfully.
+      </div>
+
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="email">Email Address <span class="required">*</span></label>
+          <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+          <span class="error-message" id="emailError">Please enter a valid email address</span>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject <span class="required">*</span></label>
+          <input type="text" id="subject" name="subject" placeholder="What is this regarding?" required>
+          <span class="error-message" id="subjectError">Subject cannot be empty</span>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message <span class="required">*</span></label>
+          <textarea id="message" name="message" placeholder="Tell us more about your inquiry..." required></textarea>
+          <span class="error-message" id="messageError">Message cannot be empty</span>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Get in Touch</h2>
+        <button class="close-btn" id="closeModalBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      
+      <div class="success-message" id="successMessage">
+        Thank you! Your message has been sent successfully.
+      </div>
+
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="email">Email Address <span class="required">*</span></label>
+          <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+          <span class="error-message" id="emailError">Please enter a valid email address</span>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject <span class="required">*</span></label>
+          <input type="text" id="subject" name="subject" placeholder="What is this regarding?" required>
+          <span class="error-message" id="subjectError">Subject cannot be empty</span>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message <span class="required">*</span></label>
+          <textarea id="message" name="message" placeholder="Tell us more about your inquiry..." required></textarea>
+          <span class="error-message" id="messageError">Message cannot be empty</span>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+      </form>
     </div>
   </div>
 
   <footer>
-    © 2025 Elementum (Pvt) Ltd. All rights reserved. | Coming Soon
+    © 2025 Elementum (PVT) Ltd. All rights reserved. | Coming Soon
   </footer>
 
-  <!-- PWA Service Worker -->
-  <script>
+   <script>
+    // Modal functionality
+    const modal = document.getElementById('contactModal');
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+
+    // Open modal
+    openModalBtn.addEventListener('click', () => {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Close modal
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      resetForm();
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    // Form validation
+    function validateEmail(email) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailPattern.test(email);
+    }
+
+    function showError(fieldId, errorId, message) {
+      const field = document.getElementById(fieldId);
+      const error = document.getElementById(errorId);
+      field.parentElement.classList.add('error');
+      error.textContent = message;
+      error.classList.add('show');
+    }
+
+    function hideError(fieldId, errorId) {
+      const field = document.getElementById(fieldId);
+      const error = document.getElementById(errorId);
+      field.parentElement.classList.remove('error');
+      error.classList.remove('show');
+    }
+
+    function validateForm() {
+      let isValid = true;
+      
+      // Email validation
+      const email = document.getElementById('email').value.trim();
+      if (!email) {
+        showError('email', 'emailError', 'Email is required');
+        isValid = false;
+      } else if (!validateEmail(email)) {
+        showError('email', 'emailError', 'Please enter a valid email address');
+        isValid = false;
+      } else {
+        hideError('email', 'emailError');
+      }
+
+      // Subject validation
+      const subject = document.getElementById('subject').value.trim();
+      if (!subject) {
+        showError('subject', 'subjectError', 'Subject is required');
+        isValid = false;
+      } else if (subject.length < 3) {
+        showError('subject', 'subjectError', 'Subject must be at least 3 characters');
+        isValid = false;
+      } else {
+        hideError('subject', 'subjectError');
+      }
+
+      // Message validation
+      const message = document.getElementById('message').value.trim();
+      if (!message) {
+        showError('message', 'messageError', 'Message is required');
+        isValid = false;
+      } else if (message.length < 10) {
+        showError('message', 'messageError', 'Message must be at least 10 characters');
+        isValid = false;
+      } else {
+        hideError('message', 'messageError');
+      }
+
+      return isValid;
+    }
+
+    // Real-time validation
+    document.getElementById('email').addEventListener('blur', function() {
+      const email = this.value.trim();
+      if (email && !validateEmail(email)) {
+        showError('email', 'emailError', 'Please enter a valid email address');
+      } else if (email) {
+        hideError('email', 'emailError');
+      }
+    });
+
+    document.getElementById('subject').addEventListener('input', function() {
+      if (this.value.trim()) {
+        hideError('subject', 'subjectError');
+      }
+    });
+
+    document.getElementById('message').addEventListener('input', function() {
+      if (this.value.trim()) {
+        hideError('message', 'messageError');
+      }
+    });
+
+    // Form submission
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!validateForm()) {
+        return;
+      }
+
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      // Create mailto link
+      const mailtoLink = `mailto:subodha.career@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent('From: ' + email + '\n\n' + message)}`;
+
+      // Open email client
+      window.location.href = mailtoLink;
+
+      // Show success message
+      successMessage.classList.add('show');
+
+      // Reset form after short delay
+      setTimeout(() => {
+        resetForm();
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+        
+        // Auto-close modal after 2 seconds
+        setTimeout(() => {
+          closeModal();
+        }, 2000);
+      }, 1000);
+    });
+
+    function resetForm() {
+      contactForm.reset();
+      successMessage.classList.remove('show');
+      hideError('email', 'emailError');
+      hideError('subject', 'subjectError');
+      hideError('message', 'messageError');
+    }
+
+    // PWA Service Worker
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("assets/service-worker.js")
         .then(() => console.log("Service Worker registered"))
