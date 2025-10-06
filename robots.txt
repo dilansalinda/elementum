@@ -1,0 +1,14 @@
+User-agent: *
+
+# Disallow low-value and admin paths
+Disallow: /zohoverify/
+
+# You can also disallow specific file types
+Disallow: /*.zip$
+Disallow: /*.tar.gz$
+
+# Allow access to everything else
+Allow: /
+
+# Link to your XML sitemap
+Sitemap: https://elementum.lk/sitemap.xml
